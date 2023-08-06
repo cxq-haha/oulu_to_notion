@@ -2,14 +2,13 @@ from notion_client import Client
 
 import constants
 
-client = Client(auth=constants.NOTION_SECRETS)
-
 
 def get_all_pages():
     """
     获取数据库中所有page
     :return: page列表
     """
+    client = Client(auth=constants.NOTION_SECRETS)
     databases = client.databases.query(constants.NOTION_DATABASE_ID)
     return databases["results"]
 
@@ -30,6 +29,7 @@ def update_word(page_id, word, translation, node):
             "Node": {"rich_text": [{"text": {"content": node}, "plain_text": node}]}
         }
     }
+    client = Client(auth=constants.NOTION_SECRETS)
     client.pages.update(page_id=page_id, **page_update_entity)
 
 
@@ -49,6 +49,7 @@ def insert_word(word, translation, node):
         },
         "parent": {"type": "database_id", "database_id": constants.NOTION_DATABASE_ID}
     }
+    client = Client(auth=constants.NOTION_SECRETS)
     client.pages.create(**page_insert_entity)
 
 
