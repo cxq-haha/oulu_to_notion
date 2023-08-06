@@ -21,7 +21,7 @@ def get_words(id):
     :return: 单词列表
     """
     headers = {"Authorization": constants.OULU_AUTHORIZATION}
-    params = 'language=en&page=0&page_size=100000&id=' + id
+    params = 'language=en&page=0&page_size=5000&id=' + id
     response = requests.get(constants.OULU_GET_WORD, headers=headers, params=params)
     if response.status_code == 200:
         return response.json()["data"]
