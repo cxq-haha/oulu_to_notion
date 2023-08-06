@@ -61,7 +61,6 @@ def get_words_from_databases():
     pages = get_all_pages()
     words = {}
     for page in pages:
-        translation = page["properties"]["Translation"]["rich_text"][0]["text"]["content"]
         word = page["properties"]["Word"]["title"][0]["text"]["content"]
-        words[word] = translation
+        words[word] = page["id"]
     return words
