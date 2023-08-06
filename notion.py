@@ -1,9 +1,8 @@
 from notion_client import Client
 
-NOTION_SECRETS = f'secret_ycQG15vyl8v5LdQz2BrgB4XzxN3jn0WgCEhM6ABozIH'
-NOTION_DATABASE_ID = f'7c136664ec514a49891a2fe89d3db5b6'
+import constants
 
-client = Client(auth=NOTION_SECRETS)
+client = Client(auth=constants.NOTION_SECRETS)
 
 
 def get_all_pages():
@@ -11,7 +10,7 @@ def get_all_pages():
     获取数据库中所有page
     :return: page列表
     """
-    databases = client.databases.query(NOTION_DATABASE_ID)
+    databases = client.databases.query(constants.NOTION_DATABASE_ID)
     return databases["results"]
 
 
@@ -48,7 +47,7 @@ def insert_word(word, translation, node):
             "Translation": {"rich_text": [{"text": {"content": translation}, "plain_text": translation}]},
             "Node": {"rich_text": [{"text": {"content": node}, "plain_text": node}]}
         },
-        "parent": {"type": "database_id", "database_id": NOTION_DATABASE_ID}
+        "parent": {"type": "database_id", "database_id": constants.NOTION_DATABASE_ID}
     }
     client.pages.create(**page_insert_entity)
 
