@@ -23,6 +23,7 @@ if __name__ == '__main__':
     init()
     # 获取notion 数据库中所有单词
     old_words = notion.get_words_from_databases()
+    print(old_words)
     # 获取欧酷中所有单词本、所有单词
     books = oulu.get_vocabulary_books()
     add_words = []
