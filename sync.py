@@ -1,4 +1,5 @@
 import argparse
+import time
 
 import notion
 import oulu
@@ -24,6 +25,8 @@ if __name__ == '__main__':
     old_words = notion.get_words_from_databases()
     # 获取欧酷中所有单词本、所有单词
     books = oulu.get_vocabulary_books()
+    add_words = []
+    update_words = []
     for book in books:
         book_id = book["id"]
         words = oulu.get_words(book_id)
@@ -32,3 +35,10 @@ if __name__ == '__main__':
             exp = word_item["exp"]
             if word not in old_words.keys():
                 notion.insert_word(word, exp, '')
+                add_words = add_words + [word]
+            else:
+                notion.update_word(old_words.get(word), word, exp, '')
+                update_words = update_words + [word]
+            time.sleep(0.1)
+    print("本次新增单词：" + " , ".join(add_words))
+    print("本次更新单词：" + " , ".join(update_words))
