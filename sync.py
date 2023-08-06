@@ -41,5 +41,5 @@ if __name__ == '__main__':
                 notion.update_word(old_words.get(word), word, exp, '')
                 update_words = update_words + [word]
             time.sleep(0.1)
-    print("本次新增单词：" + add_words)
-    print("本次更新单词：" + update_words)
+    print("本次新增单词：" + " , ".join(add_words))
+    print("本次更新单词：" + " , ".join(update_words))
